@@ -8,10 +8,11 @@ URL: [https://faviconfetcher.deno.dev](https://faviconfetcher.deno.dev)
 To fetch favicon from any site, include url query to this link. This will return the favicon. If no favicon found, this will return error response.
 
 ## Usecase
+***Code*** :  
 ```html
 <img 
-src="https://faviconfetcher.deno.dev?url=github.com"
+src="https://faviconfetcher.deno.dev?url=linux.dev"
 >
 ```
 ***Result*** :
-![GitHub Logo](https://faviconfetcher.deno.dev?url=github.com)
+![GitHub Logo](https://faviconfetcher.deno.dev?url=linux.dev)
