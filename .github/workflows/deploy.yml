@@ -29,13 +29,16 @@ jobs:
           node-version: lts/*
 
       - name: Install step
-        run: "Deno install"
+        run: "deno install"
+
+      - name: Build step
+        run: "deno run -A main.ts"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "faviconfetcher"
           entrypoint: "main.ts"
-          root: "."
+          root: "./"
           
           
