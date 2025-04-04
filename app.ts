@@ -4,10 +4,10 @@ import { fetchFavicon } from "./domFetch.ts";
 const app = new Hono();
 
 app.get("/", async (context) => {
-  const url = context.req.query("url"); // Get url
+  let url = context.req.query("url"); // Get url
   if (!url) return context.text("No URL found", 403);
   if (!url.startsWith("http://") && !url.startsWith("https://")) {
-    return context.text("Invalid Url", 403);
+    url = "https://" + url;
   }
 
   let faviconUrl = await fetchFavicon(url); // Getting Favicon URL from DOM
