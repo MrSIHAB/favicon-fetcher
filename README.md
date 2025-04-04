@@ -11,8 +11,8 @@ To fetch favicon from any site, include url query to this link. This will return
 ***Code*** :  
 ```html
 <img 
-src="https://faviconfetcher.deno.dev?url=linux.dev"
+src="https://faviconfetcher.deno.dev?url=jsr.io"
 >
 ```
 ***Result*** :
-![GitHub Logo](https://faviconfetcher.deno.dev?url=linux.dev)
+![GitHub Logo](https://faviconfetcher.deno.dev?url=jsr.io)
