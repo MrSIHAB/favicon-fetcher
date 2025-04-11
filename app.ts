@@ -1,29 +1,26 @@
-import { Hono } from "jsr:@hono/hono";
-import { fetchFavicon } from "./domFetch.ts";
+import {Hono} from "@hono/hono";
+import {getFavicon} from "./getFavicon.ts";
 
 const app = new Hono();
 
-app.get("/", async (context) => {
-  let url = context.req.query("url"); // Get url
-  if (!url) return context.text("No URL found", 403);
-  if (!url.startsWith("http://") && !url.startsWith("https://")) {
-    url = "https://" + url;
-  }
+app.get("/", async (c) => {
+  try {
+    let url = c.req.query("url");
+    if (!url) return c.text("No URL found.", 403);
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      url = "https://" + url;
+    }
 
-  let faviconUrl = await fetchFavicon(url); // Getting Favicon URL from DOM
-  if (!faviconUrl) {
-    faviconUrl = `${url}/favicon.ico`;
-  }
+    const res = await getFavicon(url);
+    if (res === null) return c.text("No Favicon found.", 404);
+    const { imageBuffer, contentType } = res;
+    if (!contentType.startsWith("image")) {
+      return c.text("No Image found.", 404);
+    }
 
-  const imageResponse = await fetch(faviconUrl);
-  if (imageResponse) {
-    const imageBuffer = await imageResponse.arrayBuffer();
-    const contentType =
-      imageResponse.headers.get("content-type") || "image/x-icon";
-
-    return context.body(imageBuffer, 200, { "Content-Type": contentType });
-  } else {
-    return context.text("Failed to fetch the favicon image.", 500);
+    return c.body(imageBuffer, 200, { "Content-Type": contentType });
+  } catch (_) {
+    return c.text("something went wrong", 500);
   }
 });
 

@@ -1,13 +1,13 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@hono/hono@*": "4.7.5",
+    "jsr:@hono/hono@^4.7.6": "4.7.6",
     "jsr:@std/assert@1": "1.0.12",
     "jsr:@std/internal@^1.0.6": "1.0.6"
   },
   "jsr": {
-    "@hono/hono@4.7.5": {
-      "integrity": "36a7e1b3db8a58e5dc2bd36a76be53346f0966e04c24c635c4d6f58875575b0a"
+    "@hono/hono@4.7.6": {
+      "integrity": "407da752c13d4644bb9d363f8349db7542e21abc3db8c13ca90cf69d8ab675ad"
     },
     "@std/assert@1.0.12": {
       "integrity": "08009f0926dda9cbd8bef3a35d3b6a4b964b0ab5c3e140a4e0351fbf34af5b9a",
@@ -20,23 +20,7 @@
     }
   },
   "redirects": {
-    "https://deno.land/": "https://deno.com/",
-    "https://deno.land/x/": "https://deno.land/x",
-    "https://deno.land/x/deno_dom": "https://deno.land/x/deno_dom@v0.1.49",
-    "https://deno.land/x/deno_dom/": "https://deno.land/x/deno_dom",
-    "https://deno.land/x/deno_dom/deno-dom-wasm.ts": "https://deno.land/x/deno_dom@v0.1.49/deno-dom-wasm.ts",
-    "https://deno.land/x/deno_dom@v0.1.48/": "https://deno.land/x/deno_dom@v0.1.48",
-    "https://deno.land/x/html": "https://deno.land/x/html@v1.2.0",
-    "https://deno.land/x/html_parser": "https://deno.land/x/html_parser@v0.1.3",
-    "https://deno.land/x/html_parser/": "https://deno.land/x/html_parser",
-    "https://deno.land/x/html_parser/m": "https://deno.land/x/html_parser@v0.1.3/m",
-    "https://deno.land/x/html_parser/mod.ts": "https://deno.land/x/html_parser@v0.1.3/mod.ts",
-    "https://deno.land/x/html_parser@v0.1.3/": "https://deno.land/x/html_parser@v0.1.3",
-    "https://deno.land/x/html_parser@v0.1.3/deno/": "https://deno.land/x/html_parser@v0.1.3/deno",
-    "https://deno.land/x/html_parser@v0.1.3/deno/src/": "https://deno.land/x/html_parser@v0.1.3/deno/src",
-    "https://deno.land/x/htmlparser": "https://deno.land/x/htmlparser@v4.1.1",
-    "https://deno.land/x/htmlparser/": "https://deno.land/x/htmlparser",
-    "https://deno.land/x/htmlparser/mod.ts": "https://deno.land/x/htmlparser@v4.1.1/mod.ts"
+    "https://deno.land/x/deno_dom/deno-dom-wasm.ts": "https://deno.land/x/deno_dom@v0.1.49/deno-dom-wasm.ts"
   },
   "remote": {
     "https://deno.land/x/deno_dom@v0.1.49/build/deno-wasm/deno-wasm.js": "d6841a06342eb6a2798ef28de79ad69c0f2fa349fa04d3ca45e5fcfbf50a9340",
@@ -65,6 +49,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@hono/hono@^4.7.6",
       "jsr:@std/assert@1"
     ]
   }
