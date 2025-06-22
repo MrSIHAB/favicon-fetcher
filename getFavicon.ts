@@ -1,8 +1,8 @@
-import {DOMParser} from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
-import {fetchImage} from "./fetchImage.ts";
-import {getWebStandardUrl} from "./getWebStandardUrl.ts";
-import {getManifestIcon} from "./getManifestIcon.ts";
-import {imageResponse} from "./types.ts";
+import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
+import { fetchImage } from "./fetchImage.ts";
+import { getWebStandardUrl } from "./getWebStandardUrl.ts";
+import { getManifestIcon } from "./getManifestIcon.ts";
+import { imageResponse } from "./types.ts";
 
 const parser = new DOMParser();
 
@@ -24,24 +24,21 @@ export const getFavicon = async (
    * This Part is for finding favicon link from document's metadata.
    */
   // getting favicon Url from Link tag;
-  const faviconMetaData = document.querySelector("link[rel='shortcut icon']") ||
-    document.querySelector("link[rel='icon']");
+  const faviconMetaData = document.querySelector("link[rel='shortcut icon']");
+  const iconMetadata = document.querySelector("link[rel='icon']");
+
   if (faviconMetaData) {
     faviconLink = faviconMetaData.getAttribute("href");
+  } else if (iconMetadata) {
+    faviconLink = iconMetadata.getAttribute("href");
   }
-
-  /// ? Returning Image Buffer
-  /*
-   * if link starts with https or http, we won't touch it
-   * mapping "//" to "https://"
-   * "/" means "baseUrl/link" and No "/" means "baseurl/current page/link"
-   */
+  //  ? Detect web standard Link and return correct link
   if (faviconLink) {
     const link = getWebStandardUrl(url, faviconLink);
     return fetchImage(link);
   }
 
-  const manifestTag = document.querySelector("link[rel='mamifest']");
+  const manifestTag = document.querySelector("link[rel='manifest']");
   if (manifestTag) {
     const manifestLink = manifestTag.getAttribute("href");
     if (manifestLink) {
