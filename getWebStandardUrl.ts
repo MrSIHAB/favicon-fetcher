@@ -7,7 +7,7 @@ export const getWebStandardUrl = (
   ) return url;
   if (url.startsWith("//")) return ("https:" + url);
   if (url.startsWith("/")) {
-    return (new URL(url, baseUrl));
+    return (new URL(url, baseUrl)).href;
   }
   return (`${baseUrl}/${url}`);
 };
