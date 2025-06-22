@@ -24,8 +24,8 @@ export const getFavicon = async (
    * This Part is for finding favicon link from document's metadata.
    */
   // getting favicon Url from Link tag;
-  const faviconMetaData = document.querySelector("link[rel='shortcut icon']");
-  const iconMetadata = document.querySelector("link[rel='icon']");
+  const faviconMetaData = document.querySelector('link[rel="shortcut icon"]');
+  const iconMetadata = document.querySelector('link[rel="icon"]');
 
   if (faviconMetaData) {
     faviconLink = faviconMetaData.getAttribute("href");
@@ -35,7 +35,7 @@ export const getFavicon = async (
   //  ? Detect web standard Link and return correct link
   if (faviconLink) {
     const link = getWebStandardUrl(url, faviconLink);
-    return fetchImage(link);
+    return await fetchImage(link);
   }
 
   const manifestTag = document.querySelector("link[rel='manifest']");
@@ -51,5 +51,14 @@ export const getFavicon = async (
    * This Part has last priority. Fetching from Default location. (example.com/favicon.ico)
    */
 
-  return fetchImage(new URL("/favicon.ico", url));
+  const favicon_ico = await fetchImage(new URL("/favicon.ico", url).href);
+  if (favicon_ico) return favicon_ico;
+
+  const favicon_svg = await fetchImage(new URL("/favicon.svg", url).href);
+  if (favicon_svg) return favicon_svg;
+
+  const favicon_png = await fetchImage(new URL("/favicon.png", url).href);
+  if (favicon_png) return favicon_png;
+
+  return null;
 };
