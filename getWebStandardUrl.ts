@@ -1,7 +1,7 @@
 export const getWebStandardUrl = (
   baseUrl: string | URL,
   url: string,
-): string | URL => {
+): string => {
   if (
     url.startsWith("http://") || url.startsWith("https://")
   ) return url;
