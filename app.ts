@@ -3,6 +3,8 @@ import { getFavicon } from "./getFavicon.ts";
 
 const app = new Hono();
 
+const defaultImg = Deno.readFileSync("img/default.png").buffer;
+
 app.get("/", async (c) => {
   try {
     let url = c.req.query("url");
@@ -14,27 +16,24 @@ app.get("/", async (c) => {
     let res = await getFavicon(url);
     if (res === null) {
       // If there isn't any image, return default image
-      const defaultImg = Deno.readFileSync("img/default.png").buffer;
       res = {
         imageBuffer: defaultImg,
         contentType: "image/png",
       };
-      return;
     }
-    if (!res.contentType.startsWith("image")) {
-      const defaultImg = Deno.readFileSync("img/default.png").buffer;
-      res = {
-        imageBuffer: defaultImg,
-        contentType: "image/png",
-      };
-      return;
-    }
+    // if (!res.contentType.startsWith("image")) {
+    //   const defaultImg = Deno.readFileSync("img/default.png").buffer;
+    //   res = {
+    //     imageBuffer: defaultImg,
+    //     contentType: "image/png",
+    //   };
+    // }
 
     const { imageBuffer, contentType } = res;
     return c.body(imageBuffer, 200, { "Content-Type": contentType });
   } catch (err) {
     console.log(err);
-    return c.text("something went wrong", 500);
+    return c.body(defaultImg, 200, { "Content-Type": "image/png" });
   }
 });
 

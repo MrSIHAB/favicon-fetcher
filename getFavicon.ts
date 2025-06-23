@@ -3,6 +3,7 @@ import { fetchImage } from "./fetchImage.ts";
 import { getWebStandardUrl } from "./getWebStandardUrl.ts";
 import { getManifestIcon } from "./getManifestIcon.ts";
 import { imageResponse } from "./types.ts";
+import { svgFetch } from "./svghandler.ts";
 
 const parser = new DOMParser();
 
@@ -54,7 +55,7 @@ export const getFavicon = async (
   const favicon_ico = await fetchImage(new URL("/favicon.ico", url).href);
   if (favicon_ico) return favicon_ico;
 
-  const favicon_svg = await fetchImage(new URL("/favicon.svg", url).href);
+  const favicon_svg = await svgFetch(new URL("/favicon.svg", url).href);
   if (favicon_svg) return favicon_svg;
 
   const favicon_png = await fetchImage(new URL("/favicon.png", url).href);

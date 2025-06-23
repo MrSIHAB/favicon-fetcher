@@ -1,4 +1,4 @@
 export interface imageResponse {
-  imageBuffer: ArrayBuffer;
+  imageBuffer: ArrayBuffer | string;
   contentType: string;
 }
